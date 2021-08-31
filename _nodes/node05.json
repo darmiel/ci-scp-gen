@@ -1,0 +1,13 @@
+{
+  "friendly": "Database",
+  "ssh": {
+    "host": "127.0.0.1",
+    "port": 22,
+    "user": "fred",
+    "auth": {
+      "key": true,
+      "key_path": "",
+      "pass": ""
+    }
+  }
+}
