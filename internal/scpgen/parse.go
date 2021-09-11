@@ -1,4 +1,4 @@
-package main
+package scpgen
 
 import (
 	"encoding/json"
@@ -8,7 +8,11 @@ import (
 	"strings"
 )
 
-func readAbs(path string) (n *Node, err error) {
+const KeyDir = "_keys"
+
+var nodeCache = make(map[string]*Node)
+
+func ReadAbs(path string) (n *Node, err error) {
 	var data []byte
 	if data, err = os.ReadFile(path); err != nil {
 		return
@@ -31,16 +35,16 @@ func readAbs(path string) (n *Node, err error) {
 	return
 }
 
-func readRel(server string) (*Node, error) {
+func ReadRel(server string) (*Node, error) {
 	// in "cache"?
-	if n, ok := nodes[server]; ok {
+	if n, ok := nodeCache[server]; ok {
 		return n, nil
 	}
 	// has extension .json?
 	if !strings.HasSuffix(server, ".json") {
 		server += ".json"
 	}
-	return readAbs(path.Join("_nodes", server))
+	return ReadAbs(path.Join("_nodes", server))
 }
 
 func writeAll(b *strings.Builder, val ...string) {
@@ -49,7 +53,7 @@ func writeAll(b *strings.Builder, val ...string) {
 	}
 }
 
-func combine(val []string) string {
+func Combine(val []string) string {
 	var b strings.Builder
 	for i, v := range val {
 		if i != 0 {
