@@ -36,7 +36,7 @@ func init() {
 	flag.BoolVar(&FailFirst, "fy", false, "Exit != 0 on first rename")
 	flag.BoolVar(&FailAny, "fl", true, "Exit != 0 if any file was renamed after checking through every file")
 	flag.BoolVar(&IncludeDirectories, "d", false, "Include Directories")
-	flag.BoolVar(&DryRun, "n", true, "Dry Run (default)")
+	flag.BoolVar(&DryRun, "n", false, "Dry Run (default)")
 
 	flag.Parse()
 

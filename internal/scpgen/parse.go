@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-const KeyDir = "_keys"
+const KeyDir = "_nodes"
 
 var nodeCache = make(map[string]*Node)
 
